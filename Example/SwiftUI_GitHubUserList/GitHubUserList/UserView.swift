@@ -12,7 +12,7 @@ struct UserView: View {
 
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: user.imageUrl)) { image in
+            AsyncImage(url: URL(string: user.avatarUrl)) { image in
                 image
                     .resizable()
                     .clipShape(.circle)
@@ -26,9 +26,9 @@ struct UserView: View {
             }
             .frame(width: 40, height: 40)
             VStack(alignment: .leading) {
-                Text(user.name)
+                Text(user.login)
                     .font(.headline)
-                Text(user.id)
+                Text(String(user.id))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -38,7 +38,7 @@ struct UserView: View {
 
 #Preview {
     UserView(
-        user: User(id: "id", name: "Name", imageUrl: "https://picsum.photos/100")
+        user: User(login: "login id", id: 1, avatarUrl: "https://picsum.photos/100")
     )
 }
 
