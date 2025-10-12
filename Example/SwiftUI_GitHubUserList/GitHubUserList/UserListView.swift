@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct UserListView: View {
     let userRepository: UserRepository
@@ -31,7 +32,12 @@ struct UserListView: View {
                 }
             }
             .navigationDestination(for: User.self) { user in
-                // detail view
+                if #available(iOS 26.0, *) {
+                    if let url = URL(string: user.htmlUrl) {
+                        WebView(url: url)
+                    }
+                }
+                EmptyView()
             }
             .alert("", isPresented: $showAlert) {
                 Button("Close", role: .cancel) {}
