@@ -38,7 +38,7 @@ struct UserView: View {
 
 #Preview {
     UserView(
-        user: User(login: "login id", id: 1, avatarUrl: "https://picsum.photos/100")
+        user: User.mock
     )
 }
 

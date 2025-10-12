@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class GitHubAPIClient {
+protocol GitHubAPIClient {
+    func fetchUsers() async throws -> [User]
+}
+
+final class GitHubAPIClientImpl: GitHubAPIClient {
     let baseURL = "https://api.github.com"
     
     func fetchUsers() async throws -> [User] {
@@ -29,3 +33,11 @@ struct HTTPResponseError: LocalizedError {
         "HTTPレスポンスが正常ではありません"
     }
 }
+
+#if DEBUG
+final class GitHubAPIClientMock: GitHubAPIClient {
+    func fetchUsers() async throws -> [User] {
+        [User.mock]
+    }
+}
+#endif
