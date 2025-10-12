@@ -10,6 +10,8 @@ import SwiftUI
 struct UserListView: View {
     let userRepository: UserRepository
     @State var users: [User] = []
+    @State var errorMessage = ""
+    @State var showAlert = false
     
     var body: some View {
         NavigationStack {
@@ -24,11 +26,17 @@ struct UserListView: View {
                 do {
                     users = try await userRepository.fetchUsers()
                 } catch {
-                    // error
+                    errorMessage = error.localizedDescription
+                    showAlert = true
                 }
             }
             .navigationDestination(for: User.self) { user in
                 // detail view
+            }
+            .alert("", isPresented: $showAlert) {
+                Button("Close", role: .cancel) {}
+            } message: {
+                Text(errorMessage)
             }
         }
     }
