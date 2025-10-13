@@ -11,7 +11,11 @@ import SwiftUI
 struct GitHubUserListApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            UserListView(
+                userRepository: UserRepositoryImpl(
+                    apiClient: GitHubAPIClientImpl()
+                )
+            )
         }
     }
 }
