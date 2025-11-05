@@ -12,8 +12,10 @@ struct GitHubUserListApp: App {
     var body: some Scene {
         WindowGroup {
             UserListView(
-                userRepository: UserRepositoryImpl(
-                    apiClient: GitHubAPIClientImpl()
+                viewModel: UserListViewModel(
+                    userRepository: UserRepositoryImpl(
+                        apiClient: GitHubAPIClientImpl()
+                    )
                 )
             )
         }

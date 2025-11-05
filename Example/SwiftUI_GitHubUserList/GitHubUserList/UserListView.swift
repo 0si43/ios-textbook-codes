@@ -9,27 +9,23 @@ import SwiftUI
 import WebKit
 
 struct UserListView: View {
-    let userRepository: UserRepository
-    @State var users: [User] = []
-    @State var errorMessage = ""
-    @State var showAlert = false
-    
+    @Bindable private var viewModel: UserListViewModel
+
+    init(viewModel: UserListViewModel) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
         NavigationStack {
             List {
-                ForEach(users) { user in
+                ForEach(viewModel.users) { user in
                     NavigationLink(value: user) {
                         UserView(user: user)
                     }
                 }
             }
             .task {
-                do {
-                    users = try await userRepository.fetchUsers()
-                } catch {
-                    errorMessage = error.localizedDescription
-                    showAlert = true
-                }
+                await viewModel.fetch()
             }
             .navigationDestination(for: User.self) { user in
                 if #available(iOS 26.0, *) {
@@ -39,15 +35,19 @@ struct UserListView: View {
                 }
                 EmptyView()
             }
-            .alert("", isPresented: $showAlert) {
+            .alert("", isPresented: $viewModel.showAlert) {
                 Button("Close", role: .cancel) {}
             } message: {
-                Text(errorMessage)
+                Text(viewModel.errorMessage)
             }
         }
     }
 }
 
 #Preview {
-    UserListView(userRepository: UserRepositoryMock())
+    UserListView(
+        viewModel: UserListViewModel(
+            userRepository: UserRepositoryMock()
+        )
+    )
 }
