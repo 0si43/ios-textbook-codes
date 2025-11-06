@@ -15,7 +15,7 @@ final class GitHubAPIClientImpl: GitHubAPIClient {
     let baseURL = "https://api.github.com"
     
     func fetchUsers() async throws -> [User] {
-        guard let url = URL(string: "\(baseURL)/users") else { fatalError("confirm usersURL") }
+        guard let url = URL(string: "\(baseURL)/users") else { return [] }
         let request = URLRequest(url: url)
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
