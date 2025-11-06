@@ -28,12 +28,15 @@ struct UserListView: View {
                 await viewModel.fetch()
             }
             .navigationDestination(for: User.self) { user in
-                if #available(iOS 26.0, *) {
-                    if let url = URL(string: user.htmlUrl) {
+                if let url = URL(string: user.htmlUrl) {
+                    if #available(iOS 26.0, *) {
                         WebView(url: url)
+                    } else {
+                        WebViewWrapper(url: url)
                     }
+                } else {
+                    EmptyView()
                 }
-                EmptyView()
             }
             .alert("", isPresented: $viewModel.showAlert) {
                 Button("Close", role: .cancel) {}
