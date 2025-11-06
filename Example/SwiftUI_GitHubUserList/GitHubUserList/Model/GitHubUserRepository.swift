@@ -14,7 +14,7 @@ final class UserRepositoryImpl: UserRepository {
     init(apiClient: GitHubAPIClient) {
         self.apiClient = apiClient
     }
-    
+
     func fetchUsers() async throws -> [User] {
         try await apiClient.fetchUsers()
     }
@@ -26,12 +26,12 @@ final class UserRepositoryMock: UserRepository {
     init() {
         self.apiClient = GitHubAPIClientMock()
     }
-    
+
     func fetchUsers() async throws -> [User] {
         [
             User.mock,
             User.mock,
-            User.mock,
+            User.mock
         ]
     }
 }

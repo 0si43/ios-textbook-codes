@@ -16,7 +16,7 @@ final class UserListViewModel {
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
     }
-    
+
     func fetch() async {
         do {
             users = try await userRepository.fetchUsers()

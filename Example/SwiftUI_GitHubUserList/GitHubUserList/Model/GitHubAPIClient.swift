@@ -13,7 +13,7 @@ protocol GitHubAPIClient {
 
 final class GitHubAPIClientImpl: GitHubAPIClient {
     let baseURL = "https://api.github.com"
-    
+
     func fetchUsers() async throws -> [User] {
         guard let url = URL(string: "\(baseURL)/users") else { return [] }
         let request = URLRequest(url: url)
