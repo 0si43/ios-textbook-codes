@@ -41,4 +41,3 @@ struct UserView: View {
         user: User.mock
     )
 }
-
