@@ -9,10 +9,11 @@ import Observation
 
 @Observable
 final class UserListViewModel {
-    let userRepository: UserRepository
     var users: [User] = []
     var errorMessage = ""
     var showAlert = false
+
+    @ObservationIgnored let userRepository: UserRepository
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
     }
