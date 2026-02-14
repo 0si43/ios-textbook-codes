@@ -6,7 +6,7 @@
 //
 
 protocol UserRepository: Sendable {
-    func fetchUsers() async throws -> [User]
+    @concurrent func fetchUsers() async throws -> [User]
 }
 
 final class UserRepositoryImpl: UserRepository {
@@ -15,7 +15,7 @@ final class UserRepositoryImpl: UserRepository {
         self.apiClient = apiClient
     }
 
-    func fetchUsers() async throws -> [User] {
+    @concurrent func fetchUsers() async throws -> [User] {
         try await apiClient.fetchUsers()
     }
 }
@@ -27,8 +27,8 @@ final class UserRepositoryMock: UserRepository {
         self.apiClient = GitHubAPIClientMock()
     }
 
-    func fetchUsers() async throws -> [User] {
-        [
+    @concurrent func fetchUsers() async throws -> [User] {
+        await [
             User.mock,
             User.mock,
             User.mock
