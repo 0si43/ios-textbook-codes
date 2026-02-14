@@ -5,7 +5,7 @@
 //  Created by Nakajima on 2025/08/06.
 //
 
-struct User: Codable, Hashable, Identifiable {
+struct User: Codable, Hashable, Identifiable, Sendable {
     let login: String
     let id: Int
     let avatarUrl: String

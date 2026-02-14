@@ -5,7 +5,7 @@
 //  Created by Nakajima on 2025/10/12.
 //
 
-protocol UserRepository {
+protocol UserRepository: Sendable {
     func fetchUsers() async throws -> [User]
 }
 
