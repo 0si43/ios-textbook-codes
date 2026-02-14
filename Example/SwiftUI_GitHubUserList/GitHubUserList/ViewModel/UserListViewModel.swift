@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Foundation
 
 @MainActor @Observable
 final class UserListViewModel {
