@@ -7,7 +7,7 @@
 
 import Observation
 
-@Observable
+@MainActor @Observable
 final class UserListViewModel {
     var users: [User] = []
     var errorMessage = ""
