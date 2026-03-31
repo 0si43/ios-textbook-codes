@@ -8,6 +8,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        print("SceneDelegate called")
         guard let windowScene = scene as? UIWindowScene else { return }
 
         let apiClient = GitHubAPIClientImpl()
@@ -18,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = navigationController
-        window.makeKeyAndVisible()
         self.window = window
+        window.makeKeyAndVisible()
     }
 }
