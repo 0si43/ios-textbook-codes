@@ -2,13 +2,13 @@ import UIKit
 
 final class UserCollectionViewCell: UICollectionViewCell {
     private let avatarImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 20
-        iv.backgroundColor = .systemGray4
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 20
+        imageView.backgroundColor = .systemGray4
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     private let loginLabel: UILabel = {
