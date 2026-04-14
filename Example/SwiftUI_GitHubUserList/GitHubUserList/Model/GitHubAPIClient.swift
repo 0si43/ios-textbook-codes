@@ -14,6 +14,7 @@ protocol GitHubAPIClient: Sendable {
 final class GitHubAPIClientImpl: GitHubAPIClient {
     let baseURL = "https://api.github.com"
 
+    @concurrent
     func fetchUsers() async throws -> [User] {
         guard let url = URL(string: "\(baseURL)/users") else { return [] }
         let request = URLRequest(url: url)
@@ -48,8 +49,8 @@ public enum APIError: LocalizedError {
 
 #if DEBUG
 final class GitHubAPIClientMock: GitHubAPIClient {
-    func fetchUsers() async throws -> [User] {
-        [User.mock]
+    @concurrent func fetchUsers() async throws -> [User] {
+        await [User.mock]
     }
 }
 #endif
